@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Students' Union (MSU) | Faculty of Medicine - University of Jaffna</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#002147',
+                            900: '#001733',
+                        },
+                        maroon: {
+                            700: '#800000',
+                            800: '#660000',
+                        },
+                        gold: {
+                            500: '#D4AF37',
+                            600: '#B89628',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-nav {
+            background-color: #800000;
+            color: #ffffff !important;
+            border-bottom: 3px solid #D4AF37;
+        }
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 33, 71, 0.88), rgba(0, 23, 51, 0.92)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        }
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-maroon-700 text-white text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-2">
+                <span class="bg-gold-500 text-navy-900 font-bold px-2 py-0.5 rounded text-xs uppercase tracking-wider">Announcement</span>
+                <span class="truncate">Annual Medical Research Symposium & Blood Donation Drive 2026 - Registration Open</span>
+            </div>
+            <div class="flex items-center space-x-4 text-xs">
+                <a href="#" onclick="switchPage('lms')" class="hover:underline flex items-center gap-1"><i class="fas fa-graduation-cap">pre-LMS Access</i></a>
+                <span class="text-gold-500">|</span>
+                <span id="current-date"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="bg-navy-800 text-white shadow-md border-b-4 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-4 cursor-pointer" onclick="switchPage('home')">
+                    <!-- Crest / Logo SVG -->
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full p-2 flex-shrink-0 flex items-center justify-center border-2 border-gold-500 shadow-inner">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <circle cx="50" cy="50" r="48" fill="#002147"/>
+                            <circle cx="50" cy="50" r="42" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                            <!-- Medical Caduceus & Book Icon -->
+                            <path d="M50 20 L50 80 M40 30 C50 25 50 35 60 30 C70 25 50 45 50 45 M60 50 C50 45 50 55 40 50 C30 45 50 65 50 65" stroke="#D4AF37" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <path d="M30 75 Q 50 68 70 75 L 70 82 Q 50 75 30 82 Z" fill="#800000" stroke="#D4AF37" stroke-width="1"/>
+                            <circle cx="50" cy="20" r="4" fill="#D4AF37"/>
+                        </svg>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h2 class="text-xs sm:text-sm font-semibold tracking-widest text-gold-500 uppercase">Faculty of Medicine</h2>
+                        <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-white uppercase">University of Jaffna</h1>
+                        <p class="text-xs sm:text-sm font-medium text-gray-300">Medical Students' Union (MSU)</p>
+                    </div>
+                </div>
+
+                <!-- Search & Quick Contact Header Actions -->
+                <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="globalSearch" placeholder="Search MSU resources, news..." class="w-full pl-9 pr-4 py-2 text-sm text-gray-800 bg-gray-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 border border-gray-300">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-navy-900 border-t border-navy-800 text-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-12">
+                    <!-- Desktop Nav Links -->
+                    <div class="hidden md:flex items-center space-x-1 font-medium overflow-x-auto">
+                        <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">Home</button>
+                        <button onclick="switchPage('committee')" id="nav-committee" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">Executive Committee</button>
+                        <button onclick="switchPage('organizations')" id="nav-organizations" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">Student Clubs & Societies</button>
+                        <button onclick="switchPage('news')" id="nav-news" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">News & Updates</button>
+                        <button onclick="switchPage('lms')" id="nav-lms" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">LMS & Academic Resources</button>
+                        <button onclick="switchPage('gallery')" id="nav-gallery" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">Gallery</button>
+                        <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn px-4 py-3 text-gray-200 hover:bg-maroon-700 hover:text-white transition rounded-t-md">Contact Us</button>
+                    </div>
+
+                    <!-- Mobile Hamburger Button -->
+                    <div class="md:hidden flex items-center justify-between w-full py-2">
+                        <span class="text-gold-500 font-semibold text-sm">Navigation Menu</span>
+                        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-gray-200 p-2 focus:outline-none">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobileMenu" class="hidden md:hidden bg-navy-900 border-t border-gray-700 px-4 pt-2 pb-4 space-y-1">
+                <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">Home</button>
+                <button onclick="switchPage('committee'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">Executive Committee</button>
+                <button onclick="switchPage('organizations'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">Student Clubs & Societies</button>
+                <button onclick="switchPage('news'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">News & Updates</button>
+                <button onclick="switchPage('lms'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">LMS & Resources</button>
+                <button onclick="switchPage('gallery'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">Gallery</button>
+                <button onclick="switchPage('contact'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-gray-200 hover:bg-maroon-700 rounded-md">Contact Us</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- PAGE 1: HOME PAGE -->
+        <section id="page-home" class="page-section active">
+            <!-- Hero Banner -->
+            <div class="hero-gradient text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 shadow-inner">
+                <div class="max-w-5xl mx-auto text-center space-y-6">
+                    <span class="bg-gold-500 text-navy-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">Official Student Portal</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Medical Students' Union</h1>
+                    <p class="text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed">
+                        Fostering academic excellence, student welfare, healthcare advocacy, and leadership at the Faculty of Medicine, University of Jaffna.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 pt-4">
+                        <button onclick="switchPage('lms')" class="bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-6 py-3 rounded-lg shadow-lg transition flex items-center gap-2">
+                            <i class="fas fa-book-reader"></i> Access Academic LMS
+                        </button>
+                        <button onclick="switchPage('committee')" class="bg-maroon-700 hover:bg-maroon-800 text-white font-semibold px-6 py-3 rounded-lg shadow-lg border border-gold-500 transition flex items-center gap-2">
+                            <i class="fas fa-users"></i> Meet Executive Board
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Welcome Message & Quick Overview -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Main Welcome Column -->
+                    <div class="lg:col-span-2 space-y-6 bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <div class="border-l-4 border-maroon-700 pl-4">
+                            <h2 class="text-2xl font-bold text-navy-800">Welcome to MSU - Faculty of Medicine</h2>
+                            <p class="text-xs text-gold-600 uppercase tracking-widest font-semibold">University of Jaffna, Sri Lanka</p>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            The Medical Students' Union (MSU) serves as the premier student representative body for medical undergraduates at the Faculty of Medicine, University of Jaffna. Established to safeguard student rights, foster academic and clinical standards, and enrich campus life, MSU bridges communication between students, faculty administration, and the healthcare community.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Through our diverse sub-units—including cultural forums, medical research clubs, sports committees, and social responsibility networks—we organize annual medical exhibitions, blood donation campaigns, inter-batch sports tournaments, and community outreach programs across the Northern Province.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                            <div class="bg-navy-800 text-white p-4 rounded-lg text-center shadow-sm">
+                                <div class="text-3xl font-extrabold text-gold-500">600+</div>
+                                <div class="text-xs text-gray-300 uppercase mt-1">Medical Undergraduates</div>
+                            </div>
+                            <div class="bg-maroon-700 text-white p-4 rounded-lg text-center shadow-sm">
+                                <div class="text-3xl font-extrabold text-white">12+</div>
+                                <div class="text-xs text-gray-200 uppercase mt-1">Active Sub-Clubs</div>
+                            </div>
+                            <div class="bg-navy-800 text-white p-4 rounded-lg text-center shadow-sm">
+                                <div class="text-3xl font-extrabold text-gold-500">40+</div>
+                                <div class="text-xs text-gray-300 uppercase mt-1">Years of Legacy</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Quick Links & Key Notices -->
+                    <div class="space-y-6">
+                        <!-- Quick Services Card -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                            <h3 class="text-lg font-bold text-navy-800 border-b pb-3 mb-4 flex items-center gap-2">
+                                <i class="fas fa-link text-maroon-700"></i> Direct Portals
+                            </h3>
+                            <ul class="space-y-3 text-sm">
+                                <li>
+                                    <a href="https://med.jfn.ac.lk/" target="_blank" class="flex items-center justify-between p-2.5 bg-gray-50 hover:bg-gold-50 rounded-lg text-navy-800 font-medium transition border border-gray-200">
+                                        <span><i class="fas fa-university text-navy-800 mr-2"></i> Faculty Main Website</span>
+                                        <i class="fas fa-external-link-alt text-xs text-gray-400"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <button onclick="switchPage('lms')" class="w-full flex items-center justify-between p-2.5 bg-gray-50 hover:bg-gold-50 rounded-lg text-navy-800 font-medium transition border border-gray-200">
+                                        <span><i class="fas fa-laptop-code text-navy-800 mr-2"></i> Student LMS & Syllabi</span>
+                                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onclick="switchPage('news')" class="w-full flex items-center justify-between p-2.5 bg-gray-50 hover:bg-gold-50 rounded-lg text-navy-800 font-medium transition border border-gray-200">
+                                        <span><i class="fas fa-bullhorn text-navy-800 mr-2"></i> Exam Schedules & Results</span>
+                                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onclick="switchPage('contact')" class="w-full flex items-center justify-between p-2.5 bg-gray-50 hover:bg-gold-50 rounded-lg text-navy-800 font-medium transition border border-gray-200">
+                                        <span><i class="fas fa-hand-holding-heart text-navy-800 mr-2"></i> Student Welfare Fund</span>
+                                        <i class="fas fa-chevron-right text-xs text-gray-400"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Important Dates Box -->
+                        <div class="bg-navy-900 text-white p-6 rounded-xl shadow-md border-t-4 border-gold-500">
+                            <h3 class="text-base font-bold text-gold-500 mb-3 flex items-center gap-2">
+                                <i class="far fa-calendar-alt"></i> Upcoming Academic Events
+                            </h3>
+                            <div class="space-y-3 text-xs">
+                                <div class="border-b border-gray-700 pb-2">
+                                    <span class="text-gold-500 font-semibold">Nov 12, 2026</span>
+                                    <p class="text-gray-200 text-sm font-medium">Final MBBS Clinical Examination Briefing</p>
+                                </div>
+                                <div class="border-b border-gray-700 pb-2">
+                                    <span class="text-gold-500 font-semibold">Nov 28, 2026</span>
+                                    <p class="text-gray-200 text-sm font-medium">Annual MSU Inter-Batch Cricket Tournament</p>
+                                </div>
+                                <div>
+                                    <span class="text-gold-500 font-semibold">Dec 05, 2026</span>
+                                    <p class="text-gray-200 text-sm font-medium">Community Medicine Field Health Camp - Point Pedro</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: EXECUTIVE COMMITTEE -->
+        <section id="page-committee" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-3xl font-bold">Executive Committee (2025/2026)</h1>
+                    <p class="text-gold-500 text-sm mt-1">Elected Representatives of the Medical Students' Union</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <!-- Main Key Bearers -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-bold text-navy-800 border-b-2 border-maroon-700 pb-2 mb-6">Key Office Bearers</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                        <!-- President -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=500&q=80" alt="President" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-gold-500 text-navy-900 font-bold text-xs px-2.5 py-1 rounded shadow">President</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Mr. K. Thinesh</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">President - MSU</p>
+                                <p class="text-xs text-gray-500 mb-4">42nd Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>president.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 123 4567</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vice President -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1594824813566-7885a3977336?auto=format&fit=crop&w=500&q=80" alt="Vice President" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-gold-500 text-navy-900 font-bold text-xs px-2.5 py-1 rounded shadow">Vice President</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Miss S. Anushiya</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">Vice President</p>
+                                <p class="text-xs text-gray-500 mb-4">42nd Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>vp.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 234 5678</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secretary -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=80" alt="Secretary" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-gold-500 text-navy-900 font-bold text-xs px-2.5 py-1 rounded shadow">Secretary</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Mr. R. Prasanth</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">General Secretary</p>
+                                <p class="text-xs text-gray-500 mb-4">43rd Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>secretary.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 345 6789</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Treasurer -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80" alt="Treasurer" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-navy-800 text-white font-bold text-xs px-2.5 py-1 rounded shadow">Treasurer</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Mr. T. Kirushanth</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">Senior Treasurer</p>
+                                <p class="text-xs text-gray-500 mb-4">43rd Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>treasurer.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 456 7890</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Editor -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Editor" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-navy-800 text-white font-bold text-xs px-2.5 py-1 rounded shadow">Editor</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Miss M. Priyanka</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">Chief Editor</p>
+                                <p class="text-xs text-gray-500 mb-4">43rd Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>editor.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 567 8901</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assistant Secretary -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden text-center hover:shadow-md transition">
+                            <div class="h-48 bg-gray-200 relative flex items-center justify-center overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80" alt="Assistant Secretary" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-navy-800 text-white font-bold text-xs px-2.5 py-1 rounded shadow">Asst. Secretary</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-navy-800">Mr. A. Vithushan</h3>
+                                <p class="text-sm text-maroon-700 font-semibold mb-2">Assistant Secretary</p>
+                                <p class="text-xs text-gray-500 mb-4">44th Batch Medical Student</p>
+                                <div class="text-xs space-y-1 text-gray-600 border-t pt-3">
+                                    <p><i class="fas fa-envelope text-gold-600 mr-2"></i>asstsec.msu@med.jfn.ac.lk</p>
+                                    <p><i class="fas fa-phone text-gold-600 mr-2"></i>+94 77 678 9012</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Batch Representatives Section -->
+                <div>
+                    <h2 class="text-xl font-bold text-navy-800 border-b-2 border-maroon-700 pb-2 mb-6">Batch Representatives</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-navy-800">41st Batch Rep</h4>
+                            <p class="text-xs text-gray-600">Mr. S. Mithuran</p>
+                            <p class="text-xs text-gold-600 mt-1"><i class="fas fa-envelope mr-1"></i> batch41@med.jfn.ac.lk</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-navy-800">42nd Batch Rep</h4>
+                            <p class="text-xs text-gray-600">Miss K. Luxshiya</p>
+                            <p class="text-xs text-gold-600 mt-1"><i class="fas fa-envelope mr-1"></i> batch42@med.jfn.ac.lk</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-navy-800">43rd Batch Rep</h4>
+                            <p class="text-xs text-gray-600">Mr. V. Ajanthan</p>
+                            <p class="text-xs text-gold-600 mt-1"><i class="fas fa-envelope mr-1"></i> batch43@med.jfn.ac.lk</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <h4 class="font-bold text-navy-800">44th Batch Rep</h4>
+                            <p class="text-xs text-gray-600">Miss T. Mathuri</p>
+                            <p class="text-xs text-gold-600 mt-1"><i class="fas fa-envelope mr-1"></i> batch44@med.jfn.ac.lk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: STUDENT ORGANIZATIONS / CLUBS -->
+        <section id="page-organizations" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-3xl font-bold">Student Clubs & Organizations</h1>
+                    <p class="text-gold-500 text-sm mt-1">Affiliated student bodies, forums, and sub-committees under MSU</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Organization 1: JMFC -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-navy-800 text-gold-500 rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                JMFC
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Jaffna Medical Faculty Club</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Coordinates cultural festivals, annual musical night, literary competitions, and social gatherings for students and faculty members.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 1982</span>
+                            <span class="text-maroon-700 font-semibold">Cultural & Social</span>
+                        </div>
+                    </div>
+
+                    <!-- Organization 2: JMFN -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-maroon-700 text-white rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                JMFN
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Medical Research & Academic Forum</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Encourages undergraduate research, organizes journal clubs, medical debate competitions, and publishes student research bulletins.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 2005</span>
+                            <span class="text-maroon-700 font-semibold">Academic & Research</span>
+                        </div>
+                    </div>
+
+                    <!-- Organization 3: Sports Council -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-gold-500 text-navy-900 rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                MSC
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Medical Sports Committee</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Manages annual inter-batch athletics meets, badminton tournaments, cricket leagues, and inter-medical faculty games.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 1980</span>
+                            <span class="text-maroon-700 font-semibold">Sports & Athletics</span>
+                        </div>
+                    </div>
+
+                    <!-- Organization 4: Green Medics -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-emerald-700 text-white rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                GMS
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Green Medics Society</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Promotes environmental sustainability, campus tree planting drives, eco-friendly healthcare practices, and waste management campaigns.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 2018</span>
+                            <span class="text-maroon-700 font-semibold">Environment & CSR</span>
+                        </div>
+                    </div>
+
+                    <!-- Organization 5: Blood Donors Club -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-red-600 text-white rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                MBDC
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Medical Blood Donors Club</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Manages emergency blood donation registries for Jaffna Teaching Hospital and holds annual mega donor drives.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 1995</span>
+                            <span class="text-maroon-700 font-semibold">Health & Welfare</span>
+                        </div>
+                    </div>
+
+                    <!-- Organization 6: Media Unit -->
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between hover:border-gold-500 transition">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-indigo-800 text-white rounded-lg flex items-center justify-center text-xl font-bold mb-4 shadow">
+                                MMU
+                            </div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Medical Media & IT Unit</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Oversees MSU official website, video coverage of university events, graphic design, and student portal maintenance.
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-3 border-t text-xs flex justify-between items-center text-gray-500">
+                            <span>Established: 2016</span>
+                            <span class="text-maroon-700 font-semibold">IT & Publications</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: NEWS & UPDATES -->
+        <section id="page-news" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold">News, Announcements & Notices</h1>
+                        <p class="text-gold-500 text-sm mt-1">Official bulletins from the MSU and Faculty Administration</p>
+                    </div>
+                    <!-- Filter Tags -->
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <button onclick="filterNews('all')" class="news-filter-btn px-3 py-1.5 rounded-full bg-gold-500 text-navy-900 font-bold">All</button>
+                        <button onclick="filterNews('academic')" class="news-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Academics</button>
+                        <button onclick="filterNews('bursary')" class="news-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Bursaries & Grants</button>
+                        <button onclick="filterNews('events')" class="news-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Events</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- News Card 1 -->
+                    <div class="news-card bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="academic">
+                        <div>
+                            <div class="h-44 bg-gray-200 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="News" class="w-full h-full object-cover">
+                                <span class="absolute top-3 left-3 bg-navy-800 text-gold-500 text-xs px-2.5 py-1 rounded font-semibold uppercase">Academics</span>
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs text-gray-400 font-medium"><i class="far fa-clock mr-1"></i> October 20, 2026</span>
+                                <h3 class="text-lg font-bold text-navy-800 mt-2 mb-2 line-clamp-2">2nd Examination for Medical Degrees (2nd MBBS) Schedule Released</h3>
+                                <p class="text-gray-600 text-sm line-clamp-3">
+                                    The Examination Branch has announced the timetable for the upcoming 2nd MBBS Anatomy, Physiology, and Biochemistry written & practical exams.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <button onclick="openModal('2nd Examination for Medical Degrees Schedule', 'The Examination Branch of the Faculty of Medicine, University of Jaffna, hereby notifies all 43rd batch undergraduates that the 2nd MBBS written and practical timetable has been published on the official LMS board. Practical spotters will begin on November 15, 2026, followed by viva examinations at the Main Anatomy Hall. Students are requested to bring their student ID and admit cards.')" class="text-maroon-700 font-bold text-sm hover:underline flex items-center gap-1">Read Full Notice <i class="fas fa-arrow-right text-xs"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- News Card 2 -->
+                    <div class="news-card bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="bursary">
+                        <div>
+                            <div class="h-44 bg-gray-200 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="News" class="w-full h-full object-cover">
+                                <span class="absolute top-3 left-3 bg-maroon-700 text-white text-xs px-2.5 py-1 rounded font-semibold uppercase">Bursaries & Grants</span>
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs text-gray-400 font-medium"><i class="far fa-clock mr-1"></i> October 18, 2026</span>
+                                <h3 class="text-lg font-bold text-navy-800 mt-2 mb-2 line-clamp-2">Mahapola & University Student Bursary Installment October 2026</h3>
+                                <p class="text-gray-600 text-sm line-clamp-3">
+                                    Eligible students are requested to check their registered bank accounts for the October Mahapola scholarship and university bursary disbursements.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <button onclick="openModal('Mahapola & Student Bursary Update', 'The Bursar office confirms that Mahapola higher education scholarship and university installment payments for October 2026 have been remitted to bank accounts. Any student experiencing non-credit or name mismatch issues should report to the Student Welfare Branch before November 5, 2026.')" class="text-maroon-700 font-bold text-sm hover:underline flex items-center gap-1">Read Full Notice <i class="fas fa-arrow-right text-xs"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- News Card 3 -->
+                    <div class="news-card bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between" data-category="events">
+                        <div>
+                            <div class="h-44 bg-gray-200 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80" alt="News" class="w-full h-full object-cover">
+                                <span class="absolute top-3 left-3 bg-gold-500 text-navy-900 text-xs px-2.5 py-1 rounded font-semibold uppercase">Events</span>
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs text-gray-400 font-medium"><i class="far fa-clock mr-1"></i> October 10, 2026</span>
+                                <h3 class="text-lg font-bold text-navy-800 mt-2 mb-2 line-clamp-2">Annual Blood Donation Drive Collects Record 180 Units</h3>
+                                <p class="text-gray-600 text-sm line-clamp-3">
+                                    Organized by the MSU Blood Donors Club in collaboration with Teaching Hospital Jaffna Blood Bank, the drive saw overwhelming turnout.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6">
+                            <button onclick="openModal('Annual Blood Donation Drive Success', 'The annual blood donation drive organized by the Medical Students Union successfully collected 180 units of blood for the Teaching Hospital Jaffna blood bank. We express our deepest gratitude to all student donors, medical staff, and volunteer organizers who contributed to this noble cause.')" class="text-maroon-700 font-bold text-sm hover:underline flex items-center gap-1">Read Full Notice <i class="fas fa-arrow-right text-xs"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: LMS & ACADEMIC RESOURCES -->
+        <section id="page-lms" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-3xl font-bold">LMS & Academic Resources</h1>
+                    <p class="text-gold-500 text-sm mt-1">Syllabi, Lecture Handouts, Academic Guides & E-Learning Access</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+                
+                <!-- Quick LMS Banner -->
+                <div class="bg-gradient-to-r from-navy-800 to-navy-900 text-white rounded-2xl p-8 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 border-l-8 border-gold-500">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-2">University LMS Portal Access</h2>
+                        <p class="text-gray-300 text-sm max-w-xl">
+                            Log in with your university student ID (e.g., 2021/MED/XXX) to access official online modules, clinical lecture notes, and assignment portals.
+                        </p>
+                    </div>
+                    <a href="https://lms.jfn.ac.lk/" target="_blank" class="bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-6 py-3 rounded-lg transition whitespace-nowrap shadow-md flex items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> Go to Official LMS Portal
+                    </a>
+                </div>
+
+                <!-- Academic Downloads Grid -->
+                <div>
+                    <h2 class="text-xl font-bold text-navy-800 border-b-2 border-maroon-700 pb-2 mb-6">Course Modules & Downloads</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-red-100 text-red-600 rounded-lg">
+                                <i class="fas fa-file-pdf text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">Introductory Phase Syllabus</h3>
+                                <p class="text-xs text-gray-500 mb-3">Pre-Clinical Phase Curriculum Guide</p>
+                                <button onclick="downloadResource('Introductory Phase Syllabus')" class="text-xs font-bold text-maroon-700 bg-maroon-50 px-3 py-1.5 rounded hover:bg-maroon-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download PDF (1.4 MB)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-red-100 text-red-600 rounded-lg">
+                                <i class="fas fa-file-pdf text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">2nd MBBS Anatomy Practical Manual</h3>
+                                <p class="text-xs text-gray-500 mb-3">Dissection & Histology Logbook</p>
+                                <button onclick="downloadResource('2nd MBBS Anatomy Manual')" class="text-xs font-bold text-maroon-700 bg-maroon-50 px-3 py-1.5 rounded hover:bg-maroon-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download PDF (3.8 MB)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-blue-100 text-blue-600 rounded-lg">
+                                <i class="fas fa-file-word text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">Clinical Clerkship Guidelines</h3>
+                                <p class="text-xs text-gray-500 mb-3">Teaching Hospital Jaffna Ward Rules</p>
+                                <button onclick="downloadResource('Clinical Clerkship Guidelines')" class="text-xs font-bold text-navy-800 bg-blue-50 px-3 py-1.5 rounded hover:bg-blue-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download DOCX (850 KB)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-red-100 text-red-600 rounded-lg">
+                                <i class="fas fa-file-pdf text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">Pharmacology Formulary Handbook</h3>
+                                <p class="text-xs text-gray-500 mb-3">Core Drugs & Clinical Dosage Notes</p>
+                                <button onclick="downloadResource('Pharmacology Formulary')" class="text-xs font-bold text-maroon-700 bg-maroon-50 px-3 py-1.5 rounded hover:bg-maroon-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download PDF (2.1 MB)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-green-100 text-green-600 rounded-lg">
+                                <i class="fas fa-file-excel text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">Community Medicine Field Work Schedule</h3>
+                                <p class="text-xs text-gray-500 mb-3">Family Health Program Allocations</p>
+                                <button onclick="downloadResource('Community Medicine Schedule')" class="text-xs font-bold text-emerald-800 bg-green-50 px-3 py-1.5 rounded hover:bg-green-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download XLSX (420 KB)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start space-x-4">
+                            <div class="p-3 bg-red-100 text-red-600 rounded-lg">
+                                <i class="fas fa-file-pdf text-2xl"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="font-bold text-navy-800 text-base">MSU Constitution & By-Laws</h3>
+                                <p class="text-xs text-gray-500 mb-3">Rules Governing Student Governance</p>
+                                <button onclick="downloadResource('MSU Constitution')" class="text-xs font-bold text-maroon-700 bg-maroon-50 px-3 py-1.5 rounded hover:bg-maroon-100 transition inline-flex items-center gap-1">
+                                    <i class="fas fa-download"></i> Download PDF (980 KB)
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: GALLERY -->
+        <section id="page-gallery" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold">Photo Gallery</h1>
+                        <p class="text-gold-500 text-sm mt-1">Highlights from MSU academic events, sports meets, and cultural activities</p>
+                    </div>
+                    <!-- Gallery Filter -->
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <button onclick="filterGallery('all')" class="gallery-filter-btn px-3 py-1.5 rounded-full bg-gold-500 text-navy-900 font-bold">All</button>
+                        <button onclick="filterGallery('sports')" class="gallery-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Sports</button>
+                        <button onclick="filterGallery('cultural')" class="gallery-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Cultural</button>
+                        <button onclick="filterGallery('community')" class="gallery-filter-btn px-3 py-1.5 rounded-full bg-navy-900 text-gray-200 hover:bg-gold-500 hover:text-navy-900 font-medium">Community Drive</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="cultural" onclick="openImageModal('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80', 'Annual Cultural Night 2025')">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Cultural</span>
+                            <h4 class="text-white font-bold text-base">Annual Cultural Night 2025</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="sports" onclick="openImageModal('https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=1200&q=80', 'Inter-Batch Athletics Meet')">
+                        <img src="https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Sports</span>
+                            <h4 class="text-white font-bold text-base">Inter-Batch Athletics Meet</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="community" onclick="openImageModal('https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1200&q=80', 'Health Camp in Kilinochchi')">
+                        <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Community Drive</span>
+                            <h4 class="text-white font-bold text-base">Rural Health Camp - Kilinochchi</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="sports" onclick="openImageModal('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80', 'Annual Cricket League')">
+                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Sports</span>
+                            <h4 class="text-white font-bold text-base">Medical Faculty Cricket League</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="community" onclick="openImageModal('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80', 'Mega Blood Donation Drive')">
+                        <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Community Drive</span>
+                            <h4 class="text-white font-bold text-base">Mega Blood Donation Drive</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card group relative bg-gray-200 rounded-xl overflow-hidden shadow-sm h-64 cursor-pointer" data-category="cultural" onclick="openImageModal('https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80', 'New Batch Welcome Ceremony')">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Gallery">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 p-4 flex flex-col justify-end">
+                            <span class="text-gold-500 text-xs font-semibold">Cultural</span>
+                            <h4 class="text-white font-bold text-base">Freshers Welcome Ceremony</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 7: CONTACT US -->
+        <section id="page-contact" class="page-section">
+            <div class="bg-navy-800 text-white py-10 px-4 sm:px-6 lg:px-8 border-b-4 border-gold-500">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-3xl font-bold">Contact Us</h1>
+                    <p class="text-gold-500 text-sm mt-1">Get in touch with the Medical Students' Union or Faculty Representatives</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    
+                    <!-- Contact Form -->
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                        <h2 class="text-xl font-bold text-navy-800 mb-2">Send MSU a Message</h2>
+                        <p class="text-xs text-gray-500 mb-6">For queries regarding student welfare, academic issues, or club activities.</p>
+
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address *</label>
+                                    <input type="email" required class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Student Batch / ID</label>
+                                    <input type="text" placeholder="e.g. 43rd Batch" class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Subject *</label>
+                                <input type="text" required class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Message *</label>
+                                <textarea rows="4" required class="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-navy-800 hover:bg-maroon-700 text-white font-bold py-3 px-6 rounded-lg shadow transition">
+                                Submit Message
+                            </button>
+                        </form>
+                        <div id="formSuccessMessage" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-sm font-medium text-center">
+                            <i class="fas fa-check-circle mr-2"></i> Thank you! Your message has been sent to the MSU Executive Secretariat.
+                        </div>
+                    </div>
+
+                    <!-- Contact Details & Interactive Map Placeholder -->
+                    <div class="space-y-6">
+                        <div class="bg-navy-900 text-white p-8 rounded-xl shadow-md border-t-4 border-gold-500">
+                            <h3 class="text-xl font-bold text-gold-500 mb-6">Faculty Location & Address</h3>
+                            <div class="space-y-4 text-sm">
+                                <div class="flex items-start space-x-3">
+                                    <i class="fas fa-map-marker-alt text-gold-500 mt-1"></i>
+                                    <div>
+                                        <p class="font-bold">Medical Students' Union Secretariat</p>
+                                        <p class="text-gray-300 text-xs">Faculty of Medicine, University of Jaffna</p>
+                                        <p class="text-gray-300 text-xs">Adiyapatham Road, Kokuvil West, Jaffna 40000, Sri Lanka</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-phone-alt text-gold-500"></i>
+                                    <p class="text-xs text-gray-200">+94 (0)21 222 2073 / +94 (0)21 222 2261</p>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <i class="fas fa-envelope text-gold-500"></i>
+                                    <p class="text-xs text-gray-200">msu@med.jfn.ac.lk</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-gray-700">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-gold-500 mb-3">Connect with MSU</h4>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="w-9 h-9 bg-navy-800 rounded-full flex items-center justify-center text-gray-300 hover:text-gold-500 hover:bg-maroon-700 transition"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="w-9 h-9 bg-navy-800 rounded-full flex items-center justify-center text-gray-300 hover:text-gold-500 hover:bg-maroon-700 transition"><i class="fab fa-youtube"></i></a>
+                                    <a href="#" class="w-9 h-9 bg-navy-800 rounded-full flex items-center justify-center text-gray-300 hover:text-gold-500 hover:bg-maroon-700 transition"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Embed Widget -->
+                        <div class="bg-gray-200 rounded-xl overflow-hidden h-64 shadow-inner border border-gray-300 relative flex items-center justify-center">
+                            <iframe 
+                                title="Faculty of Medicine Location Map"
+                                class="w-full h-full border-0" 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.208753229864!2d80.0215!3d9.6833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fe54fd2e8cd2a49%3A0xb35b71dbceae39e0!2sFaculty%20of%20Medicine%2C%20University%20of%20Jaffna!5e0!3m2!1sen!2slk!4v1680000000000!5m2!1sen!2slk" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-900 text-white border-t-4 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-sm">
+                <!-- Column 1 -->
+                <div class="space-y-3">
+                    <h3 class="text-gold-500 font-bold uppercase tracking-wider text-xs">University of Jaffna</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Medical Students' Union (MSU)<br>
+                        Faculty of Medicine, Adiyapatham Road,<br>
+                        Jaffna, Sri Lanka.
+                    </p>
+                </div>
+                <!-- Column 2 -->
+                <div class="space-y-2">
+                    <h3 class="text-gold-500 font-bold uppercase tracking-wider text-xs">Quick Links</h3>
+                    <ul class="text-xs space-y-1.5 text-gray-300">
+                        <li><a href="https://med.jfn.ac.lk/" target="_blank" class="hover:underline">Faculty Main Site</a></li>
+                        <li><a href="https://www.jfn.ac.lk/" target="_blank" class="hover:underline">University Website</a></li>
+                        <li><a href="https://lms.jfn.ac.lk/" target="_blank" class="hover:underline">E-Learning Portal</a></li>
+                        <li><a href="https://lib.jfn.ac.lk/" target="_blank" class="hover:underline">Medical Library</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3 -->
+                <div class="space-y-2">
+                    <h3 class="text-gold-500 font-bold uppercase tracking-wider text-xs">Student Welfare</h3>
+                    <ul class="text-xs space-y-1.5 text-gray-300">
+                        <li><a href="#" onclick="switchPage('news')" class="hover:underline">Bursaries & Scholarships</a></li>
+                        <li><a href="#" onclick="switchPage('committee')" class="hover:underline">Student Mentorship</a></li>
+                        <li><a href="#" onclick="switchPage('contact')" class="hover:underline">Student Grievances</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4 -->
+                <div class="space-y-3">
+                    <h3 class="text-gold-500 font-bold uppercase tracking-wider text-xs">Emergency Contacts</h3>
+                    <p class="text-xs text-gray-300">Jaffna Teaching Hospital: +94 21 222 2261</p>
+                    <p class="text-xs text-gray-300">Student Affairs Branch: +94 21 222 2073</p>
+                </div>
+            </div>
+
+            <div class="border-t border-navy-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+                <p>&copy; 2026 Medical Students' Union (MSU), Faculty of Medicine, University of Jaffna. All Rights Reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL POPUP FOR NOTICES AND IMAGES -->
+    <div id="infoModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-xl w-full p-6 relative shadow-2xl animate-fade-in">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 id="modalTitle" class="text-xl font-bold text-navy-800 pr-6 mb-3">Notice Details</h3>
+            <div id="modalContent" class="text-sm text-gray-600 leading-relaxed max-h-96 overflow-y-auto mb-6">
+                <!-- Content injected dynamically -->
+            </div>
+            <div class="text-right border-t pt-3">
+                <button onclick="closeModal()" class="bg-navy-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-maroon-700 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT FOR SPA ROUTING & INTERACTION -->
+    <script>
+        // Initialize current date on top bar
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Single Page Navigation Function
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(p => p.classList.remove('active'));
+
+            // Show selected page
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Update Active Navigation Tab State
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active-nav'));
+
+            const activeBtn = document.getElementById('nav-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('active-nav');
+            }
+
+            // Scroll to top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Set default active tab
+        document.addEventListener("DOMContentLoaded", function() {
+            switchPage('home');
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal Functions
+        function openModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalContent').innerText = text;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openImageModal(imgSrc, caption) {
+            document.getElementById('modalTitle').innerText = caption;
+            document.getElementById('modalContent').innerHTML = `<img src="${imgSrc}" class="w-full h-auto rounded-lg shadow-md mb-2"><p class="text-xs text-gray-500 text-center">${caption}</p>`;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // News Filter Functionality
+        function filterNews(category) {
+            const newsCards = document.querySelectorAll('.news-card');
+            const btns = document.querySelectorAll('.news-filter-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-gold-500', 'text-navy-900', 'font-bold');
+                btn.classList.add('bg-navy-900', 'text-gray-200');
+            });
+
+            event.target.classList.remove('bg-navy-900', 'text-gray-200');
+            event.target.classList.add('bg-gold-500', 'text-navy-900', 'font-bold');
+
+            newsCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Gallery Filter Functionality
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-card');
+            const btns = document.querySelectorAll('.gallery-filter-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-gold-500', 'text-navy-900', 'font-bold');
+                btn.classList.add('bg-navy-900', 'text-gray-200');
+            });
+
+            event.target.classList.remove('bg-navy-900', 'text-gray-200');
+            event.target.classList.add('bg-gold-500', 'text-navy-900', 'font-bold');
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact Form Handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const msg = document.getElementById('formSuccessMessage');
+            msg.classList.remove('hidden');
+            document.getElementById('contactForm').reset();
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 6000);
+        }
+
+        // Mock Resource Download
+        function downloadResource(name) {
+            alert('Downloading resource: ' + name);
+        }
+    </script>
+</body>
+</html>
